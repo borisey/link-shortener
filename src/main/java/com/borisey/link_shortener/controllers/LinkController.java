@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 public class LinkController {
@@ -30,8 +31,16 @@ public class LinkController {
     @PostMapping("/link/add")
     public String linkLinkAdd(@RequestParam String fullUrl, Model model) {
         Link link = new Link(fullUrl);
+        String randomString = usingUUID();
+        String shortUrl = randomString.substring(0, 6);
+        link.setShortUrl(shortUrl);
         linkRepository.save(link);
         return "redirect:/link";
+    }
+
+    static String usingUUID() {
+        UUID randomUUID = UUID.randomUUID();
+        return randomUUID.toString().replaceAll("-", "");
     }
 
     @GetMapping("/link/{id}")
