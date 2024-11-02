@@ -13,19 +13,28 @@
             <h2>Ссылки</h2>
 
             <table class="table">
-                <div th:each="el : ${links}">
+                <thead>
                     <tr>
-                        <td>
-                            <p th:text="'Исходная ссылка: ' + ${el.fullUrl}" />
-                        </td>
-                        <td>
-                            <p th:text="'Сокращенная ссылка: ' + ${el.shortUrl}" />
-                        </td>
-                        <td>
-                            <p th:text="'Ограничение количества переходов: ' + ${el.count}" />
-                        </td>
+                        <th>Исходная ссылка</th>
+                        <th>Сокращенная ссылка</th>
+                        <th>Ограничение количества переходов</th>
                     </tr>
-                </div>
+                </thead>
+                <tbody>
+                    <div th:each="el : ${links}">
+                        <tr>
+                            <td>
+                                <p th:text="${el.fullUrl}" />
+                            </td>
+                            <td>
+                                <p th:text="${el.shortUrl}" />
+                            </td>
+                            <td>
+                                <p th:text="${el.count}" />
+                            </td>
+                        </tr>
+                    </div>
+                </tbody>
             </table>
         </div>
     </main>
