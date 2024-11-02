@@ -24,19 +24,20 @@ public class LinkController {
     private LinkRepository linkRepository;
 
     @GetMapping("/link")
-    public String link(Model model) {
+    public String link(HttpServletRequest request, Model model) {
         Iterable<Link> links = linkRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        String baseUrl = getBaseUrl(request);
         model.addAttribute("links", links);
+        model.addAttribute("baseUrl", baseUrl);
         return "link";
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(HttpServletRequest request, @RequestParam String fullUrl, int count, Model model) throws UnknownHostException {
+    public String linkLinkAdd(@RequestParam String fullUrl, int count, Model model) throws UnknownHostException {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
-        String baseUrl = getBaseUrl(request);
-        link.setShortUrl(baseUrl + '/' + shortUrl);
+        link.setShortUrl(shortUrl);
         link.setCount(count);
         linkRepository.save(link);
         return "redirect:/link";

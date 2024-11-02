@@ -29,7 +29,7 @@
                                 <p th:text="${el.fullUrl}" />
                             </td>
                             <td>
-                                <p th:text="${el.shortUrl}" />
+                                <p th:text="${baseUrl} + '/' + ${el.shortUrl}" />
                             </td>
                             <td style="text-align: center">
                                 <p th:text="${el.count}" />
