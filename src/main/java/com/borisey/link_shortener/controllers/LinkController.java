@@ -3,6 +3,7 @@ package com.borisey.link_shortener.controllers;
 import com.borisey.link_shortener.models.Link;
 import com.borisey.link_shortener.repo.LinkRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +22,9 @@ public class LinkController {
 
     @GetMapping("/link")
     public String link(Model model) {
-        Iterable<Link> links = linkRepository.findAll();
+        Iterable<Link> links = linkRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         model.addAttribute("links", links);
         return "link";
-    }
-
-    @GetMapping("/link/add")
-    public String linkAdd(Model model) {
-        return "link-add";
     }
 
     @PostMapping("/link/add")
