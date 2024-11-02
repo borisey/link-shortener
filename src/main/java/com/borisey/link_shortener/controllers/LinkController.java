@@ -19,7 +19,7 @@ public class LinkController {
     @Autowired
     private LinkRepository linkRepository;
 
-    @GetMapping("/link")
+    @GetMapping("/")
     public String link(Model model) {
         Iterable<Link> links = linkRepository.findAll();
         model.addAttribute("links", links);
