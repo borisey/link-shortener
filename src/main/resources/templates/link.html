@@ -11,7 +11,14 @@
 
     <main>
         <div class="table-responsive">
-            <h2 class="display-6 text-center mb-4" th:text="${title}"/>
+            <h2>Ссылки</h2>
+            <div th:each="el : ${links}">
+
+                <p th:text="${el.short_url}" />
+                <p th:text="${el.full_url}" />
+                <p th:text="${el.count}" />
+
+            </div>
         </div>
     </main>
 
