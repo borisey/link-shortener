@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import java.net.URI;
-import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -29,7 +27,8 @@ public class MainController {
 
         System.out.println(shortUrl);
 
-        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("https://ya.ru/")).build();
-    }
+        Link link = linkRepository.findByShortUrl(shortUrl);
 
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
+    }
 }

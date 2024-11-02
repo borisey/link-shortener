@@ -12,7 +12,7 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String short_url, full_url;
+    private String shortUrl, fullUrl;
     private int count;
 
     public Long getId() {
@@ -24,19 +24,19 @@ public class Link {
     }
 
     public String getShortUrl() {
-        return short_url;
+        return shortUrl;
     }
 
-    public void setShortUrl(String short_url) {
-        this.short_url = short_url;
+    public void setShortUrl(String shortUrl) {
+        this.shortUrl = shortUrl;
     }
 
     public String getFullUrl() {
-        return full_url;
+        return fullUrl;
     }
 
-    public void setFullUrl(String full_url) {
-        this.full_url = full_url;
+    public void setFullUrl(String fullUrl) {
+        this.fullUrl = fullUrl;
     }
 
     public int getCount() {
@@ -51,6 +51,6 @@ public class Link {
     }
 
     public Link(String fullUrl) {
-        this.full_url  = fullUrl;
+        this.fullUrl  = fullUrl;
     }
 }
