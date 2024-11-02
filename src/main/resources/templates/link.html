@@ -13,9 +13,9 @@
             <h2>Ссылки</h2>
             <div th:each="el : ${links}">
 
-                <p th:text="'Исходная ссылка:' + ${el.fullUrl}" />
-                <p th:text="'Сокращенная ссылка:' + ${el.shortUrl}" />
-                <p th:text="'Ограничение количества переходов:' + ${el.count}" />
+                <p th:text="'Исходная ссылка: ' + ${el.fullUrl}" />
+                <p th:text="'Сокращенная ссылка: ' + ${el.shortUrl}" />
+                <p th:text="'Ограничение количества переходов: ' + ${el.count}" />
 
             </div>
         </div>
