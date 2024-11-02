@@ -23,19 +23,19 @@ public class Link {
         this.id = id;
     }
 
-    public String getShort_url() {
+    public String getShortUrl() {
         return short_url;
     }
 
-    public void setShort_url(String short_url) {
+    public void setShortUrl(String short_url) {
         this.short_url = short_url;
     }
 
-    public String getFull_url() {
+    public String getFullUrl() {
         return full_url;
     }
 
-    public void setFull_url(String full_url) {
+    public void setFullUrl(String full_url) {
         this.full_url = full_url;
     }
 
@@ -45,5 +45,13 @@ public class Link {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public Link() {
+    }
+
+    public Link(String fullUrl, String shortUrl) {
+        this.full_url  = fullUrl;
+        this.short_url = shortUrl;
     }
 }
