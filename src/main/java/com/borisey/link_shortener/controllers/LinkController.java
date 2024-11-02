@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -33,12 +31,13 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(HttpServletRequest request, @RequestParam String fullUrl, Model model) throws UnknownHostException {
+    public String linkLinkAdd(HttpServletRequest request, @RequestParam String fullUrl, int count, Model model) throws UnknownHostException {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
         String baseUrl = getBaseUrl(request);
         link.setShortUrl(baseUrl + '/' + shortUrl);
+        link.setCount(count);
         linkRepository.save(link);
         return "redirect:/link";
     }
