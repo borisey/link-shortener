@@ -32,8 +32,8 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(@RequestParam String shortUrl, @RequestParam String fullUrl, Model model) {
-        Link link = new Link(shortUrl, fullUrl);
+    public String linkLinkAdd(@RequestParam String fullUrl, Model model) {
+        Link link = new Link(fullUrl);
         linkRepository.save(link);
         return "redirect:/link";
     }

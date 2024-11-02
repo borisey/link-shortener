@@ -50,8 +50,7 @@ public class Link {
     public Link() {
     }
 
-    public Link(String fullUrl, String shortUrl) {
+    public Link(String fullUrl) {
         this.full_url  = fullUrl;
-        this.short_url = shortUrl;
     }
 }
