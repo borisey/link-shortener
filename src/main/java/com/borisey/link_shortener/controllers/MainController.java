@@ -16,7 +16,7 @@ public class MainController {
     private LinkRepository linkRepository;
 
     @GetMapping("/")
-    public String linkAdd(@CookieValue(value = "UUID", defaultValue = "defaultValue") String UUID, Model model) {
+    public String linkAdd(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
 
         model.addAttribute("UUID", UUID);
         return "link-add";
