@@ -27,20 +27,20 @@
                 <tbody>
                     <div th:each="el : ${links}">
                         <tr>
-                            <td>
+                            <td style="text-align: center">
                                 <p th:text="${el.fullUrl}" />
                             </td>
-                            <td>
+                            <td style="text-align: center">
                                 <p th:text="${baseUrl} + '/' + ${el.shortUrl}"></p>
                             </td>
 
-                            <td th:switch="${el.count}">
+                            <td th:switch="${el.count}" style="text-align: center">
                                 <p th:case="0">Лимит исчерпан</p>
                                 <p th:case="null">Ограничение количества переходов не установлено</p>
                                 <p th:case="*" th:text="${el.count}"/>
                             </td>
 
-                            <td>
+                            <td style="text-align: center">
                                 <a th:href="'/link/' + ${el.id} + '/edit'">Редактировать</a>
                             </td>
 
