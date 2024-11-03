@@ -36,7 +36,7 @@
 
                             <td th:switch="${el.count}">
                                 <p th:case="0">Лимит исчерпан</p>
-                                <p th:case="null">Ограничение не установлено</p>
+                                <p th:case="null">Ограничение количества переходов не установлено</p>
                                 <p th:case="*" th:text="${el.count}"/>
                             </td>
 
