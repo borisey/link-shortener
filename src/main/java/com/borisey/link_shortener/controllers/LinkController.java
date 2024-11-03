@@ -118,13 +118,16 @@ public class LinkController {
         String baseUrl = getBaseUrl(request);
 
         Integer count = link.getCount();
-        if (count == 0) {
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/limit-reached")).build();
-        }
 
         if (count != null) {
+            if (count == 0) {
+                return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/limit-reached")).build();
+            }
+
             link.setCount(--count);
             linkRepository.save(link);
+
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
         }
 
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
