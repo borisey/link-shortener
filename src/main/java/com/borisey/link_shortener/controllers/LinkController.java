@@ -1,9 +1,13 @@
 package com.borisey.link_shortener.controllers;
 
 import com.borisey.link_shortener.models.Link;
+import com.borisey.link_shortener.models.User;
 import com.borisey.link_shortener.repo.LinkRepository;
+import com.borisey.link_shortener.repo.UserRepository;
 import jakarta.annotation.Nullable;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -23,6 +27,8 @@ public class LinkController {
 
     @Autowired
     private LinkRepository linkRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/link")
     public String link(HttpServletRequest request, Model model) {
@@ -34,13 +40,26 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(@RequestParam String fullUrl, @Nullable Integer count, Model model) {
+    public String linkLinkAdd(HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
         link.setShortUrl(shortUrl);
         link.setCount(count);
         linkRepository.save(link);
+
+        // todo: сохранять только если нет UUID
+        String UUID = randomString.substring(0, 20);
+        User user = new User(UUID);
+        userRepository.save(user);
+
+        // todo: сохранять только если нет UUID
+        // Сохраняю UUID в cookie
+        Cookie cookie = new Cookie("UUID", UUID);
+        cookie.setPath("/"); // global cookie accessible
+        // Добавляю файл cookie в ответ сервера
+        response.addCookie(cookie);
+
         return "redirect:/link";
     }
 
