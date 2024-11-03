@@ -29,10 +29,13 @@
                                 <p th:text="${el.fullUrl}" />
                             </td>
                             <td>
-                                <p th:text="${baseUrl} + '/' + ${el.shortUrl}" />
+                                <p th:text="${baseUrl} + '/' + ${el.shortUrl}"></p>
                             </td>
-                            <td style="text-align: center">
-                                <p th:text="${el?.count} ?: 'Ограничение не установлено'" />
+
+                            <td th:switch="${el.count}">
+                                <p th:case="0">Лимит исчерпан</p>
+                                <p th:case="null">Ограничение не установлено</p>
+                                <p th:case="*" th:text="${el.count}"/>
                             </td>
                         </tr>
                     </div>

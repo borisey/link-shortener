@@ -24,10 +24,17 @@ public class MainController {
 
     @GetMapping("/{shortUrl}")
     public ResponseEntity<Object> linkRedirect(@PathVariable(value = "shortUrl") String shortUrl, Model model) {
-
-        System.out.println(shortUrl);
-
         Link link = linkRepository.findByShortUrl(shortUrl);
+
+        Integer count = link.getCount();
+        if (count == 0) {
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("http://localhost:8080/link")).build();
+        }
+
+        if (count != null) {
+            link.setCount(--count);
+            linkRepository.save(link);
+        }
 
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
     }
