@@ -99,16 +99,16 @@ public class LinkController {
     }
 
     @PostMapping("/link/{id}/edit")
-    public String linkLinkUpdate(@PathVariable(value = "id") long id, @RequestParam String shortUrl, @RequestParam String fullUrl, Model model) {
+    public String linkLinkUpdate(@PathVariable(value = "id") long id, @RequestParam String fullUrl, Integer count, Model model) {
         Link link = linkRepository.findById(id).orElseThrow();
-        link.setShortUrl(shortUrl);
         link.setFullUrl(fullUrl);
+        link.setCount(count);
         linkRepository.save(link);
 
         return "redirect:/link";
     }
 
-    @PostMapping("/link/{id}/remove")
+    @PostMapping("/link/{id}/delete")
     public String linkLinkRemove(@PathVariable(value = "id") long id, Model model) {
         Link link = linkRepository.findById(id).orElseThrow();
         linkRepository.delete(link);

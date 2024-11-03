@@ -20,6 +20,8 @@
                         <th style="text-align: center">Исходная ссылка</th>
                         <th style="text-align: center">Сокращенная ссылка</th>
                         <th style="text-align: center">Оставшееся количество переходов</th>
+                        <th style="text-align: center">Редактировать</th>
+                        <th style="text-align: center">Удалить</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +38,14 @@
                                 <p th:case="0">Лимит исчерпан</p>
                                 <p th:case="null">Ограничение не установлено</p>
                                 <p th:case="*" th:text="${el.count}"/>
+                            </td>
+
+                            <td>
+                                <a th:href="'/link/' + ${el.id} + '/edit'">Редактировать</a>
+                            </td>
+
+                            <td>
+                                <a th:href="'/link/' + ${el.id} + '/delete'">Удалить</a>
                             </td>
                         </tr>
                     </div>
