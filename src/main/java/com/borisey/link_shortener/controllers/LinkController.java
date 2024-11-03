@@ -52,6 +52,11 @@ public class LinkController {
         return "limit-reached";
     }
 
+    @GetMapping("/link/not-found")
+    public String linkNotFound(Model model) {
+        return "not-found";
+    }
+
     public static String getBaseUrl(HttpServletRequest request) {
         String baseUrl = ServletUriComponentsBuilder
                 .fromRequestUri(request)
@@ -116,6 +121,10 @@ public class LinkController {
         Link link = linkRepository.findByShortUrl(shortUrl);
 
         String baseUrl = getBaseUrl(request);
+
+        if (link == null) {
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/not-found")).build();
+        }
 
         Integer count = link.getCount();
 
