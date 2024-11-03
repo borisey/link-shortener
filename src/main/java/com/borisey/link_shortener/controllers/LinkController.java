@@ -19,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,16 +32,17 @@ public class LinkController {
     private UserRepository userRepository;
 
     @GetMapping("/link")
-    public String link(HttpServletRequest request, Model model) {
+    public String link(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletRequest request, Model model) {
         Iterable<Link> links = linkRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         String baseUrl = getBaseUrl(request);
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
+        model.addAttribute("UUID", UUID);
         return "link";
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
+    public String linkLinkAdd(HttpServletResponse response, @RequestParam String fullUrl, String UUID, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
@@ -48,17 +50,18 @@ public class LinkController {
         link.setCount(count);
         linkRepository.save(link);
 
-        // todo: сохранять только если нет UUID
-        String UUID = randomString.substring(0, 20);
-        User user = new User(UUID);
-        userRepository.save(user);
+        // Генерирую UUID только новым пользователям
+        if (Objects.equals(UUID, "")) {
+            UUID = randomString.substring(0, 20);
+            User user = new User(UUID);
+            userRepository.save(user);
 
-        // todo: сохранять только если нет UUID
-        // Сохраняю UUID в cookie
-        Cookie cookie = new Cookie("UUID", UUID);
-        cookie.setPath("/"); // global cookie accessible
-        // Добавляю файл cookie в ответ сервера
-        response.addCookie(cookie);
+            // Сохраняю UUID в cookie
+            Cookie cookie = new Cookie("UUID", UUID);
+            cookie.setPath("/"); // global cookie accessible
+            // Добавляю файл cookie в ответ сервера
+            response.addCookie(cookie);
+        }
 
         return "redirect:/link";
     }
