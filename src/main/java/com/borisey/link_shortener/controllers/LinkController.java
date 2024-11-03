@@ -6,6 +6,8 @@ import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
@@ -41,6 +45,11 @@ public class LinkController {
         link.setCount(count);
         linkRepository.save(link);
         return "redirect:/link";
+    }
+
+    @GetMapping("/link/limit-reached")
+    public String linkLimitReached(Model model) {
+        return "limit-reached";
     }
 
     public static String getBaseUrl(HttpServletRequest request) {
@@ -100,6 +109,25 @@ public class LinkController {
         linkRepository.delete(link);
 
         return "redirect:/link";
+    }
+
+    @GetMapping("/{shortUrl}")
+    public ResponseEntity<Object> linkRedirect(HttpServletRequest request, @PathVariable(value = "shortUrl") String shortUrl, Model model) {
+        Link link = linkRepository.findByShortUrl(shortUrl);
+
+        String baseUrl = getBaseUrl(request);
+
+        Integer count = link.getCount();
+        if (count == 0) {
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/limit-reached")).build();
+        }
+
+        if (count != null) {
+            link.setCount(--count);
+            linkRepository.save(link);
+        }
+
+        return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
     }
 
 }
