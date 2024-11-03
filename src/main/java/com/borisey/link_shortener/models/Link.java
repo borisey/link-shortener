@@ -12,8 +12,7 @@ public class Link {
 
     private String shortUrl, fullUrl;
 
-    @Column(nullable = true, unique = false)
-    private int count;
+    private Integer count = null;
 
     public Long getId() {
         return id;
@@ -39,11 +38,11 @@ public class Link {
         this.fullUrl = fullUrl;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 

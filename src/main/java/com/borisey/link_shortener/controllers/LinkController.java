@@ -2,6 +2,7 @@ package com.borisey.link_shortener.controllers;
 
 import com.borisey.link_shortener.models.Link;
 import com.borisey.link_shortener.repo.LinkRepository;
+import jakarta.annotation.Nullable;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -33,7 +34,7 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(@RequestParam String fullUrl, int count, Model model) throws UnknownHostException {
+    public String linkLinkAdd(@RequestParam String fullUrl, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);

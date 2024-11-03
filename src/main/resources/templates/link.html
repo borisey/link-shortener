@@ -32,7 +32,7 @@
                                 <p th:text="${baseUrl} + '/' + ${el.shortUrl}" />
                             </td>
                             <td style="text-align: center">
-                                <p th:text="${el.count}" />
+                                <p th:text="${el?.count} ?: 'Ограничение не установлено'" />
                             </td>
                         </tr>
                     </div>
