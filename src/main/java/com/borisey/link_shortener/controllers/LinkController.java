@@ -53,7 +53,8 @@ public class LinkController {
         // Генерирую UUID только новым пользователям
         if (Objects.equals(UUID, "")) {
             UUID = randomString.substring(0, 20);
-            User user = new User(UUID);
+            User user = new User();
+            user.setUUID(UUID);
             userRepository.save(user);
 
             // Сохраняю UUID в cookie

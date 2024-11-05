@@ -11,6 +11,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String UUID;
 
     public String getUUID() {
@@ -32,7 +33,4 @@ public class User {
     public User() {
     }
 
-    public User(String UUID) {
-        this.UUID  = UUID;
-    }
 }
