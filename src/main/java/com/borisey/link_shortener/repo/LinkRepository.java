@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface LinkRepository extends CrudRepository<Link, Long> {
     Iterable<Link> findAll(Sort colName);
     Link findByShortUrl(String shortUrl);
-    Iterable<Link> findByUUID(String UUID);
+    Iterable<Link> findByUUID(String UUID, Sort colName);
     Link findByIdAndUUID(Long id, String UUID);
 }

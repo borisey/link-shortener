@@ -33,7 +33,7 @@ public class LinkController {
 
     @GetMapping("/link")
     public String link(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletRequest request, Model model) {
-        Iterable<Link> links = linkRepository.findByUUID(UUID);
+        Iterable<Link> links = linkRepository.findByUUID(UUID, Sort.by(Sort.Direction.DESC, "id"));
         String baseUrl = getBaseUrl(request);
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
@@ -42,7 +42,7 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(HttpServletResponse response, @RequestParam String fullUrl, String UUID, @Nullable Integer count, Model model) {
+    public String linkLinkAdd(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
