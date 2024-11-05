@@ -184,7 +184,8 @@ public class LinkController {
         }
 
 
-        LocalDateTime created = link.getCreated();
+        LocalDateTime created = link.getCreated()
+                .plusDays(1);
 
         LocalDateTime now = LocalDateTime.now();
         boolean isAfter = now.isAfter(created);
