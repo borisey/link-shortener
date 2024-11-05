@@ -17,6 +17,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th style="text-align: center">ID</th>
                         <th style="text-align: center">Исходная ссылка</th>
                         <th style="text-align: center">Сокращенная ссылка</th>
                         <th style="text-align: center">Оставшееся количество переходов</th>
@@ -27,6 +28,9 @@
                 <tbody>
                     <div th:each="el : ${links}">
                         <tr>
+                            <td style="text-align: center">
+                                <p th:text="${el.id}" />
+                            </td>
                             <td style="text-align: center">
                                 <p th:text="${el.fullUrl}" />
                             </td>
