@@ -80,6 +80,16 @@ public class LinkController {
         return "not-found";
     }
 
+    @GetMapping("/link/edit-failed")
+    public String editFailed(Model model) {
+        return "edit-failed";
+    }
+
+    @GetMapping("/link/delete-failed")
+    public String deleteFailed(Model model) {
+        return "delete-failed";
+    }
+
     public static String getBaseUrl(HttpServletRequest request) {
         String baseUrl = ServletUriComponentsBuilder
                 .fromRequestUri(request)
@@ -115,7 +125,7 @@ public class LinkController {
 
         // Если статью добавил не этот пользователь
         if (userLink == null) {
-            return "redirect:/link";
+            return "redirect:/link/edit-failed";
         }
 
         Optional<Link> link = linkRepository.findById(id);
@@ -136,9 +146,16 @@ public class LinkController {
     }
 
     @GetMapping("/link/{id}/delete")
-    public String linkLinkRemove(@PathVariable(value = "id") long id, Model model) {
-        Link link = linkRepository.findById(id).orElseThrow();
-        linkRepository.delete(link);
+    public String linkLinkRemove(@CookieValue(value = "UUID", defaultValue = "") String UUID, @PathVariable(value = "id") long id, Model model) {
+
+        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
+
+        // Если статью добавил не этот пользователь
+        if (userLink == null) {
+            return "redirect:/link/delete-failed";
+        }
+
+        linkRepository.delete(userLink);
 
         return "redirect:/link";
     }
