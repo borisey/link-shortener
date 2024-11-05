@@ -183,7 +183,6 @@ public class LinkController {
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/not-found")).build();
         }
 
-
         LocalDateTime created = link.getCreated()
                 .plusDays(1);
 

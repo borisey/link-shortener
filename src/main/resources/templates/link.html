@@ -21,6 +21,8 @@
                         <th style="text-align: center">Исходная ссылка</th>
                         <th style="text-align: center">Сокращенная ссылка</th>
                         <th style="text-align: center">Оставшееся количество переходов</th>
+                        <th style="text-align: center">Дата/время добавления</th>
+                        <th style="text-align: center">Время жизни ссылки истечет через</th>
                         <th style="text-align: center">Редактировать</th>
                         <th style="text-align: center">Удалить</th>
                     </tr>
@@ -42,6 +44,14 @@
                                 <p th:case="0">Лимит исчерпан</p>
                                 <p th:case="null">Ограничение количества переходов не установлено</p>
                                 <p th:case="*" th:text="${el.count}"/>
+                            </td>
+
+                            <td style="text-align: center">
+                                <p th:text="${#temporals.format(el.created, 'dd.MM.yyyy HH:mm:ss')}"></p>
+                            </td>
+
+                            <td style="text-align: center">
+                                <p>Одни сутки с момента добавления</p>
                             </td>
 
                             <td style="text-align: center">
