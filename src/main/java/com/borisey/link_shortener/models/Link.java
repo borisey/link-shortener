@@ -3,6 +3,8 @@ package com.borisey.link_shortener.models;
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Link {
 
@@ -11,6 +13,16 @@ public class Link {
     private Long id;
 
     private String shortUrl, fullUrl, UUID;
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    private LocalDateTime created;
 
     public String getUUID() {
         return UUID;

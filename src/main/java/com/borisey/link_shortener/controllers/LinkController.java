@@ -18,10 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.DateTime;
 
 @Controller
 public class LinkController {
@@ -41,13 +45,22 @@ public class LinkController {
         return "link";
     }
 
+    @GetMapping("/link/time-expired")
+    public String linkTimeExpired(Model model) {
+
+        return "time-expired";
+    }
+
     @PostMapping("/link/add")
     public String linkLinkAdd(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
         link.setShortUrl(shortUrl);
         link.setCount(count);
+        link.setCreated(currentDateTime);
         linkRepository.save(link);
 
         // Генерирую UUID только новым пользователям
@@ -161,13 +174,23 @@ public class LinkController {
     }
 
     @GetMapping("/{shortUrl}")
-    public ResponseEntity<Object> linkRedirect(HttpServletRequest request, @PathVariable(value = "shortUrl") String shortUrl, Model model) {
+    public ResponseEntity<Object> linkRedirect(HttpServletRequest request, @PathVariable(value = "shortUrl") String shortUrl, Model model) throws ParseException {
         Link link = linkRepository.findByShortUrl(shortUrl);
 
         String baseUrl = getBaseUrl(request);
 
         if (link == null) {
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/not-found")).build();
+        }
+
+
+        LocalDateTime created = link.getCreated();
+
+        LocalDateTime now = LocalDateTime.now();
+        boolean isAfter = now.isAfter(created);
+
+        if (isAfter) {
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/time-expired")).build();
         }
 
         Integer count = link.getCount();

@@ -1,11 +1,9 @@
 package com.borisey.link_shortener.controllers;
 
-import com.borisey.link_shortener.models.Link;
 import com.borisey.link_shortener.models.User;
 import com.borisey.link_shortener.repo.LinkRepository;
 import com.borisey.link_shortener.repo.UserRepository;
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
