@@ -3,9 +3,15 @@
         <span class="fs-4">Link Shortener</span>
     </a>
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-        <a href="/logout" class="me-3 py-2 link-body-emphasis text-decoration-none">Выйти</a>
-        <p th:text="'Ваш UUID: ' + ${UUID}" class="me-3 py-2 link-body-emphasis text-decoration-none"></p>
+    <nav th:switch="${UUID}" class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a th:case="''" href="/login" class="me-3 py-2 link-body-emphasis text-decoration-none">Войти</a>
+        <a th:case="null" href="/login" class="me-3 py-2 link-body-emphasis text-decoration-none">Войти</a>
+
+        <span th:case="*">
+            <a href="/logout" class="me-3 py-2 link-body-emphasis text-decoration-none">Выйти</a>
+            <p th:text="'Ваш UUID: ' + ${UUID}" class="me-3 py-2 link-body-emphasis text-decoration-none"></p>
+        </span>
+
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/">Главная</a>
         <a class="me-3 py-2 link-body-emphasis text-decoration-none" href="/link">Мои ссылки</a>
     </nav>

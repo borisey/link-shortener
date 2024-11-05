@@ -25,7 +25,7 @@ public class MainController {
     @GetMapping("/logout")
     public String logout(HttpServletResponse response, Model model) {
 
-        Cookie cookie = new Cookie("UUID", null);
+        Cookie cookie = new Cookie("UUID", "");
         cookie.setMaxAge(0);
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
