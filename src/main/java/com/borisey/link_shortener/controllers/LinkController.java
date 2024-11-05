@@ -191,6 +191,7 @@ public class LinkController {
         boolean isAfter = now.isAfter(created);
 
         if (isAfter) {
+            linkRepository.delete(link);
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/time-expired")).build();
         }
 
