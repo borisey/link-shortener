@@ -33,7 +33,7 @@ public class LinkController {
 
     @GetMapping("/link")
     public String link(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletRequest request, Model model) {
-        Iterable<Link> links = linkRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        Iterable<Link> links = linkRepository.findByUUID(UUID);
         String baseUrl = getBaseUrl(request);
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
@@ -63,6 +63,9 @@ public class LinkController {
             // Добавляю файл cookie в ответ сервера
             response.addCookie(cookie);
         }
+
+        link.setUUID(UUID);
+        linkRepository.save(link);
 
         return "redirect:/link";
     }
@@ -106,11 +109,15 @@ public class LinkController {
     }
 
     @GetMapping("/link/{id}/edit")
-    public String linkEdit(@PathVariable(value = "id") long id, Model model) {
-        if(!linkRepository.existsById(id)) {
-            return "redirect:/link";
+    public String linkEdit(@CookieValue(value = "UUID", defaultValue = "") String UUID, @PathVariable(value = "id") long id, Model model) {
 
+        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
+
+        // Если статью добавил не этот пользователь
+        if (userLink == null) {
+            return "redirect:/link";
         }
+
         Optional<Link> link = linkRepository.findById(id);
         ArrayList<Link> res = new ArrayList<>();
         link.ifPresent(res::add);

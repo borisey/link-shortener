@@ -10,7 +10,15 @@ public class Link {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String shortUrl, fullUrl;
+    private String shortUrl, fullUrl, UUID;
+
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
 
     private Integer count = null;
 

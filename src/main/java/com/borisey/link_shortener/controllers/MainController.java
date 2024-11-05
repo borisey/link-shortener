@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @Controller
 public class MainController {
 
@@ -41,7 +43,12 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String login(HttpServletResponse response, Model model) {
+    public String login(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, Model model) {
+
+        if (!Objects.equals(UUID, "")) {
+            return "redirect:/";
+        }
+
         return "login";
     }
 
