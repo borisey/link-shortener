@@ -6,7 +6,7 @@
 <h2>Быстрый старт</h2>
 <p>1. Скопируйте репозиторий проекта в определенную директорию: выполните команду <strong>git clone git@github.com:borisey/link-shortener.git ./</strong></p>
 <p>2. Установите MySQL в Docker-контейнере: выполните команду <strong>docker-compose up</strong></p>
-<p>3. Запустите приложение в IDE IDEA: LinkShortenerApplication.java</p>
+<p>3. Запустите приложение в IDE IDEA: откройте файл LinkShortenerApplication.java и выполните команду "RUN"</p>
 
 <h2>Описание приложения</h2>
 <h3>Функциональность</h3>
