@@ -13,6 +13,6 @@ deploy-production:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh -o StrictHostKeyChecking=no borisey@95.142.39.128
       'cd /var/www/html/cutli.ru && git pull origin main'
-    - sudo $MAVEN_HOME/bin/mvn clean compile
-    - sudo $MAVEN_HOME/bin/mvn package
-    - sudo java -jar target/link-shortener-0.0.1-SNAPSHOT.jar --server.port=80
+    - $MAVEN_HOME/bin/mvn clean compile
+    - $MAVEN_HOME/bin/mvn package
+    - java -jar target/link-shortener-0.0.1-SNAPSHOT.jar --server.port=80
