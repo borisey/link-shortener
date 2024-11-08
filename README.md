@@ -4,8 +4,8 @@
 <p>Пример реализации приложения можно посмотреть по ссылке: <a href="http://cutli.ru/">cutli.ru</a></p>
 
 <h2>Быстрый старт</h2>
-<p>1. Скопируйте репозиторий проекта</p>
-<p>2. Выполните команду (необходима для запуска MySQL сервера в Docker): docker-compose up</p>
+<p>1. Скопируйте репозиторий проекта в определенную директорию: выполните команду <strong>git clone git@github.com:borisey/link-shortener.git ./</strong></p>
+<p>2. Установите MySQL в Docker-контейнере: выполните команду <strong>docker-compose up</strong></p>
 <p>3. Запустите приложение в IDE IDEA: LinkShortenerApplication.java</p>
 
 <h2>Описание приложения</h2>
