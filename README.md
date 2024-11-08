@@ -4,8 +4,9 @@
 <p>Пример реализации приложения можно посмотреть по ссылке: <a href="http://cutli.ru/">cutli.ru</a></p>
 
 <h2>Быстрый старт</h2>
-<p>Выполните команду (необходима для запуска MySQL сервера в Docker): docker-compose up</p>
-<p>Запустите приложение в IDE IDEA: LinkShortenerApplication.java</p>
+1. <p>Скопируйте репозиторий проекта</p>
+2. <p>Выполните команду (необходима для запуска MySQL сервера в Docker): docker-compose up</p>
+3. <p>Запустите приложение в IDE IDEA: LinkShortenerApplication.java</p>
 
 <h2>Описание приложения</h2>
 1. <p>Функциональность</p>
