@@ -139,6 +139,7 @@ public class LinkController {
         ArrayList<Link> res = new ArrayList<>();
         link.ifPresent(res::add);
         model.addAttribute("link", res);
+        model.addAttribute("UUID", UUID);
         return "link-edit";
     }
 
