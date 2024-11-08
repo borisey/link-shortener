@@ -1,6 +1,7 @@
 stages:
   - deploy-production
 deploy-production:
+  image: maven:23-openjdk-23
   stage: deploy-production
   environment:
     name: Production
