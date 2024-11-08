@@ -13,3 +13,6 @@ deploy-production:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh -o StrictHostKeyChecking=no borisey@95.142.39.128
       'cd /var/www/html/cutli.ru && git pull origin main'
+    - mvn clean compile
+    - mvn package
+    - java -jar target/link-shortener-0.0.1-SNAPSHOT.jar --server.port=80
