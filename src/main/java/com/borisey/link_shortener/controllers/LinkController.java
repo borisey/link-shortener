@@ -109,19 +109,22 @@ public class LinkController {
 
     static String usingUUID() {
         UUID randomUUID = UUID.randomUUID();
+
         return randomUUID.toString().replaceAll("-", "");
     }
 
     @GetMapping("/link/{id}")
     public String linkDetails(@PathVariable(value = "id") long id, Model model) {
-        if(!linkRepository.existsById(id)) {
-            return "redirect:/link";
+        if (!linkRepository.existsById(id)) {
 
+            return "redirect:/link";
         }
+
         Optional<Link> link = linkRepository.findById(id);
         ArrayList<Link> res = new ArrayList<>();
         link.ifPresent(res::add);
         model.addAttribute("link", res);
+
         return "link-details";
     }
 
