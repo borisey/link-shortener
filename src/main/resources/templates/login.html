@@ -16,7 +16,9 @@
 
             <form action="/login" method="post">
                 <input th:required="required" type="text" name="UUID" placeholder="Введите ваш UUID" class="form-control"><br>
-                <button type="submit" class="btn btn-success">Войти</button>
+                <div style="text-align: center;">
+                    <button type="submit" class="btn btn-success">Войти</button>
+                </div>
             </form>
 
             <footer th:insert="~{blocks/footer :: footer}" class="pt-4 my-md-5 pt-md-5 mt-auto"></footer>
