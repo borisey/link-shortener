@@ -10,4 +10,5 @@ public class LinkShortenerApplication {
 		SpringApplication.run(LinkShortenerApplication.class, args);
 	}
 
+
 }
