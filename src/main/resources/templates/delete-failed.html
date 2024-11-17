@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="container py-3">
-    <header th:insert="blocks/header :: header"></header>
+    <header th:insert="~{blocks/header :: header}"></header>
 
     <main>
         <div class="container mt-5 mb-5">
@@ -18,7 +18,7 @@
 
     </main>
 
-    <footer th:insert="blocks/footer :: footer" class="pt-4 my-md-5 pt-md-5 border-top"></footer>
+    <footer th:insert="~{blocks/footer :: footer}" class="pt-4 my-md-5 pt-md-5 border-top"></footer>
 
 </div>
 
