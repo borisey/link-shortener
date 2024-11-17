@@ -28,7 +28,7 @@ public class MainController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response, Model model) {
+    public void logout(HttpServletResponse response, Model model) {
 
         Cookie cookie = new Cookie("UUID", null);
         cookie.setMaxAge(0);
@@ -37,7 +37,6 @@ public class MainController {
         cookie.setPath("/");
         response.addCookie(cookie);
 
-        return "link-add";
     }
 
     @GetMapping("/login")
