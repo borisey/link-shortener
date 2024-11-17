@@ -15,8 +15,8 @@
             <h1 style="text-align: center;">Добавление ссылки</h1>
 
             <form action="/link/add" method="post">
-                <input type="text" name="fullUrl" placeholder="Введите ссылку" class="form-control"><br>
-                <input type="number" name="count" placeholder="Лимит переходов по ссылке" class="form-control"><br>
+                <input th:required="required" type="text" name="fullUrl" placeholder="Введите ссылку" class="form-control"><br>
+                <input th:required="required" type="number" name="count" placeholder="Лимит переходов по ссылке" class="form-control"><br>
                 <div style="text-align: center;">
                     <button type="submit" class="btn btn-success">Добавить ссылку</button>
                 </div>
