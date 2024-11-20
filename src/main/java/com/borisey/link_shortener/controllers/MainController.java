@@ -56,6 +56,7 @@ public class MainController {
 
 //        System.out.println("Удаленный домен " + cookie.getDomain());
 
+        request.getSession().invalidate();
         return "redirect:/";
     }
 
