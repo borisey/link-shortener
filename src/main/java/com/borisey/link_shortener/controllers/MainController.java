@@ -34,6 +34,8 @@ public class MainController {
         // Получаю хост сайта
         String baseUrl = request.getLocalName();
 
+        System.out.println(baseUrl);
+
         Cookie cookie = new Cookie("UUID", null);
         cookie.setMaxAge(0);
         cookie.setSecure(true);
