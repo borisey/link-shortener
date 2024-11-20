@@ -4,6 +4,7 @@ import com.borisey.link_shortener.models.User;
 import com.borisey.link_shortener.repo.LinkRepository;
 import com.borisey.link_shortener.repo.UserRepository;
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,13 +29,17 @@ public class MainController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletResponse response, Model model) {
+    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
+
+        // Получаю хост сайта
+        String baseUrl = request.getLocalName();
 
         Cookie cookie = new Cookie("UUID", null);
         cookie.setMaxAge(0);
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
+        cookie.setDomain(baseUrl);
         response.addCookie(cookie);
 
         return "link-add";
@@ -51,13 +56,17 @@ public class MainController {
     }
 
     @PostMapping("/login")
-    public String login(HttpServletResponse response, @RequestParam String UUID, Model model) {
+    public String login(HttpServletRequest request, HttpServletResponse response, @RequestParam String UUID, Model model) {
         User userIdentity = userRepository.findByUUID(UUID);
+
+        // Получаю хост сайта
+        String baseUrl = request.getLocalName();
 
         if (userIdentity == null) {
             return "redirect:/auth-failed";
         } else {
             Cookie cookie = new Cookie("UUID", UUID);
+            cookie.setDomain(baseUrl);
             cookie.setPath("/");
             response.addCookie(cookie);
 
