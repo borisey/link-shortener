@@ -39,9 +39,9 @@ public class MainController {
 
                 cookie.setMaxAge(0);
                 // Получаю хост сайта
-//                String baseUrl = request.getServerName();
-//                cookie.setDomain(baseUrl);
-                cookie.setPath("/"); // global cookie accessible
+                String baseUrl = request.getServerName();
+                cookie.setDomain(baseUrl);
+//                cookie.setPath("/"); // global cookie accessible
                 response.addCookie(cookie);
             }
 
