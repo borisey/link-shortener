@@ -69,6 +69,8 @@ public class LinkController {
 
             // Сохраняю UUID в cookie
             Cookie cookie = new Cookie("UUID", UUID);
+            cookie.setMaxAge(7 * 24 * 60 * 60);
+            cookie.setHttpOnly(true);
             cookie.setDomain(baseUrl);
             cookie.setPath("/"); // global cookie accessible
 
