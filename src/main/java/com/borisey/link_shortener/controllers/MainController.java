@@ -10,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Objects;
 
 @Controller
@@ -29,10 +32,10 @@ public class MainController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws MalformedURLException {
 
         // Получаю хост сайта
-        String baseUrl = request.getLocalName();
+        String baseUrl = request.getServerName();
 
         System.out.println(baseUrl);
 
@@ -62,7 +65,7 @@ public class MainController {
         User userIdentity = userRepository.findByUUID(UUID);
 
         // Получаю хост сайта
-        String baseUrl = request.getLocalName();
+        String baseUrl = request.getServerName();
 
         if (userIdentity == null) {
             return "redirect:/auth-failed";
