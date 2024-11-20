@@ -29,19 +29,15 @@ public class MainController {
         return "link-add";
     }
 
-    @RequestMapping(path = "/logout", method = RequestMethod.GET)
-    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws MalformedURLException {
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
             for (Cookie cookie : cookies) {
-                System.out.println(cookie.getName() + " " + cookie.getValue());
-                System.out.println(cookie.getDomain());
-
                 cookie.setMaxAge(0);
                 // Получаю хост сайта
                 String baseUrl = request.getServerName();
                 cookie.setDomain(baseUrl);
-//                cookie.setPath("/"); // global cookie accessible
                 response.addCookie(cookie);
             }
 
