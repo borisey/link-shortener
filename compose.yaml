@@ -3,10 +3,10 @@ services:
     container_name: 'link-shortener-mysql'
     image: 'mysql:latest'
     environment:
-      - 'MYSQL_DATABASE=mydatabase'
+      - 'MYSQL_DATABASE=link_shortener'
       - 'MYSQL_PASSWORD=secret'
       - 'MYSQL_ROOT_PASSWORD=verysecret'
       - 'MYSQL_USER=myuser'
-      - 'MYSQL_ROOT_HOST=172.18.0.1'
+      - 'MYSQL_ROOT_HOST=localhost'
     ports:
       - '3306:3306'
