@@ -38,7 +38,6 @@ public class MainController {
                 System.out.println(cookie.getDomain());
 
                 cookie.setMaxAge(0);
-//                cookie.setHttpOnly(true);
                 // Получаю хост сайта
 //                String baseUrl = request.getServerName();
 //                cookie.setDomain(baseUrl);
