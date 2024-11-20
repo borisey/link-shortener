@@ -48,16 +48,8 @@ public class MainController {
                 System.out.println(cookie.getName() + " " + cookie.getValue());
                 System.out.println(cookie.getDomain());
 
-//                cookie = new Cookie(cookie.getName(), "123");
-//                cookie.setValue("");
-//                cookie.setPath("/");
-//                cookie.setMaxAge(0);
-////                cookie.setDomain(".cutli.ru");
-//                response.addCookie(cookie);
-
-//                Cookie cookie = new Cookie("UUID", "123");
                 cookie.setMaxAge(0);
-                cookie.setValue("123");
+//                cookie.setValue("123");
                 cookie.setHttpOnly(true);
                 cookie.setDomain(baseUrl);
                 cookie.setPath("/"); // global cookie accessible
