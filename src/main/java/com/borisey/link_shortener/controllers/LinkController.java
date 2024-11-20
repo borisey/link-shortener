@@ -69,12 +69,12 @@ public class LinkController {
 
             // Сохраняю UUID в cookie
             Cookie cookie = new Cookie("UUID", UUID);
-            cookie.setDomain("cutli.ru");
+            cookie.setDomain(baseUrl);
             cookie.setPath("/"); // global cookie accessible
-            // Добавляю файл cookie в ответ сервера
 
             System.out.println("Сохраненный домен " + cookie.getDomain());
 
+            // Добавляю файл cookie в ответ сервера
             response.addCookie(cookie);
         }
 

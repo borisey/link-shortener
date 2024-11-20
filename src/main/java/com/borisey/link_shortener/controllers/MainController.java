@@ -37,15 +37,21 @@ public class MainController {
 
         System.out.println(baseUrl);
 
-        Cookie cookie = new Cookie("UUID", null);
-        cookie.setMaxAge(0);
-        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setDomain(baseUrl);
-        response.addCookie(cookie);
+//        Cookie[] cookies = request.getCookies();
 
-        System.out.println("Удаленный домен " + cookie.getDomain());
+//        Cookies.setCookie(COOKIE_NAME, "", new Date(), domain, path, false);
+
+//        Cookie cookie = new Cookie("UUID", null);
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null)
+            for (Cookie cookie : cookies) {
+                cookie.setValue("");
+                cookie.setPath("/");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+
+//        System.out.println("Удаленный домен " + cookie.getDomain());
 
         return "link-add";
     }
