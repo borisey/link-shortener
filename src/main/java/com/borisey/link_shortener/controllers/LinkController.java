@@ -64,12 +64,12 @@ public class LinkController {
             user.setUUID(UUID);
             userRepository.save(user);
 
-            // Получаю хост сайта
+            // Получаю хост сайта почему появляется точка перед доменом?
             String baseUrl = request.getServerName();
 
             // Сохраняю UUID в cookie
             Cookie cookie = new Cookie("UUID", UUID);
-            cookie.setDomain(baseUrl);
+            cookie.setDomain("cutli.ru");
             cookie.setPath("/"); // global cookie accessible
             // Добавляю файл cookie в ответ сервера
 
