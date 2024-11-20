@@ -48,11 +48,11 @@ public class MainController {
                 System.out.println(cookie.getName() + " " + cookie.getValue());
                 System.out.println(cookie.getDomain());
 
-                cookie = new Cookie(cookie.getName(), "123");
+//                cookie = new Cookie(cookie.getName(), "123");
                 cookie.setValue("");
                 cookie.setPath("/");
                 cookie.setMaxAge(0);
-                cookie.setDomain(".cutli.ru");
+//                cookie.setDomain(".cutli.ru");
                 response.addCookie(cookie);
             }
 
