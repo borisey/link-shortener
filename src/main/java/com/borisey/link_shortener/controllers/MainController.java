@@ -35,7 +35,7 @@ public class MainController {
         // Получаю хост сайта
         String baseUrl = request.getServerName();
 
-        System.out.println(baseUrl);
+        System.out.println("logout " + baseUrl);
 
 //        Cookie[] cookies = request.getCookies();
 
@@ -45,8 +45,7 @@ public class MainController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
             for (Cookie cookie : cookies) {
-                System.out.println(cookie.getName());
-                System.out.println(cookie.getValue());
+                System.out.println(cookie.getName() + " " + cookie.getValue());
                 System.out.println(cookie.getDomain());
 
                 cookie.setValue("");
