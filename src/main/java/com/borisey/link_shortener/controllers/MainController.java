@@ -29,36 +29,16 @@ public class MainController {
         return "link-add";
     }
 
-    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws MalformedURLException {
 
-        // Получаю хост сайта
-        String baseUrl = request.getServerName();
-
-        System.out.println("logout " + baseUrl);
-
-//        Cookie[] cookies = request.getCookies();
-
-//        Cookies.setCookie(COOKIE_NAME, "", new Date(), domain, path, false);
-
-//        Cookie cookie = new Cookie("UUID", null);
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
             for (Cookie cookie : cookies) {
-                System.out.println(cookie.getName() + " " + cookie.getValue());
-                System.out.println(cookie.getDomain());
-
                 cookie.setMaxAge(0);
-//                cookie.setValue("123");
-                cookie.setHttpOnly(true);
-                cookie.setDomain(baseUrl);
-                cookie.setPath("/"); // global cookie accessible
                 response.addCookie(cookie);
             }
 
-//        System.out.println("Удаленный домен " + cookie.getDomain());
-
-//        request.getSession().invalidate();
         return "redirect:/auth-success";
     }
 

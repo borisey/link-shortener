@@ -8,12 +8,6 @@
         <a th:case="null" href="/login" class="me-3 py-2 link-body-emphasis text-decoration-none">Войти</a>
 
         <span th:case="*">
-               <form method="post" action="/logout">
-                    <div style="text-align: center;">
-                        <button type="submit" class="btn btn-success">Выйти POST</button>
-                    </div>
-                </form>
-
             <a href="/logout" class="me-3 py-2 link-body-emphasis text-decoration-none">Выйти</a>
             <p th:text="'Ваш UUID: ' + ${UUID}" class="me-3 py-2 link-body-emphasis text-decoration-none"></p>
         </span>
