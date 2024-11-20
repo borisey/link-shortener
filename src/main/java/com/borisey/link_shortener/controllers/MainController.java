@@ -46,7 +46,7 @@ public class MainController {
                 response.addCookie(cookie);
             }
 
-        return "redirect:/logout-success";
+        return "logout-success";
     }
 
     @GetMapping("/login")
