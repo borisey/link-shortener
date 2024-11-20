@@ -45,6 +45,10 @@ public class MainController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
             for (Cookie cookie : cookies) {
+                System.out.println(cookie.getName());
+                System.out.println(cookie.getValue());
+                System.out.println(cookie.getDomain());
+
                 cookie.setValue("");
                 cookie.setPath("/");
                 cookie.setMaxAge(0);
