@@ -40,8 +40,8 @@ public class MainController {
                 cookie.setMaxAge(0);
 //                cookie.setHttpOnly(true);
                 // Получаю хост сайта
-                String baseUrl = request.getServerName();
-                cookie.setDomain(baseUrl);
+//                String baseUrl = request.getServerName();
+//                cookie.setDomain(baseUrl);
                 cookie.setPath("/"); // global cookie accessible
                 response.addCookie(cookie);
             }
