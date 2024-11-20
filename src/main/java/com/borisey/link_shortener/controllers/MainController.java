@@ -32,7 +32,7 @@ public class MainController {
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) {
         Cookie[] cookies = request.getCookies();
-        if (cookies != null)
+        if (cookies != null) {
             for (Cookie cookie : cookies) {
                 cookie.setMaxAge(0);
                 // Получаю хост сайта
@@ -40,6 +40,7 @@ public class MainController {
                 cookie.setDomain(baseUrl);
                 response.addCookie(cookie);
             }
+        }
 
         return "logout-success";
     }
