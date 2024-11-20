@@ -46,7 +46,7 @@ public class LinkController {
     }
 
     @PostMapping("/link/add")
-    public String linkLinkAdd(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
+    public String linkLinkAdd(HttpServletRequest request, @CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, @RequestParam String fullUrl, @Nullable Integer count, Model model) {
         Link link = new Link(fullUrl);
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -64,10 +64,17 @@ public class LinkController {
             user.setUUID(UUID);
             userRepository.save(user);
 
+            // Получаю хост сайта
+            String baseUrl = request.getServerName();
+
             // Сохраняю UUID в cookie
             Cookie cookie = new Cookie("UUID", UUID);
+            cookie.setDomain(baseUrl);
             cookie.setPath("/"); // global cookie accessible
             // Добавляю файл cookie в ответ сервера
+
+            System.out.println("Сохраненный домен " + cookie.getDomain());
+
             response.addCookie(cookie);
         }
 

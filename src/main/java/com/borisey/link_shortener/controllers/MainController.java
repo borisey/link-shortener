@@ -47,6 +47,8 @@ public class MainController {
         cookie.setDomain(baseUrl);
         response.addCookie(cookie);
 
+        System.out.println("Удаленный домен " + cookie.getDomain());
+
         return "link-add";
     }
 
