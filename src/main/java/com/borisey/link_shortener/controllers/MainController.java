@@ -31,12 +31,6 @@ public class MainController {
 
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws MalformedURLException {
-
-        // Получаю хост сайта
-        String baseUrl = request.getServerName();
-
-        System.out.println("logout " + baseUrl);
-
         Cookie[] cookies = request.getCookies();
         if (cookies != null)
             for (Cookie cookie : cookies) {
@@ -44,13 +38,15 @@ public class MainController {
                 System.out.println(cookie.getDomain());
 
                 cookie.setMaxAge(0);
-                cookie.setHttpOnly(true);
-                cookie.setDomain(baseUrl);
+//                cookie.setHttpOnly(true);
+                // Получаю хост сайта
+//                String baseUrl = request.getServerName();
+//                cookie.setDomain(baseUrl);
                 cookie.setPath("/"); // global cookie accessible
                 response.addCookie(cookie);
             }
 
-        return "redirect:/auth-success";
+        return "redirect:/logout-success";
     }
 
     @GetMapping("/login")
