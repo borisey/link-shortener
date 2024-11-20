@@ -23,7 +23,7 @@ public class MainController {
     private UserRepository userRepository;
 
     @GetMapping("/")
-    public String linkAdd(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
+    public String home(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
 
         model.addAttribute("UUID", UUID);
         return "link-add";
@@ -48,15 +48,16 @@ public class MainController {
                 System.out.println(cookie.getName() + " " + cookie.getValue());
                 System.out.println(cookie.getDomain());
 
-                cookie.setValue("");
-                cookie.setPath("/");
+//                cookie.setValue("");
+//                cookie.setPath("/");
+                cookie = new Cookie(cookie.getName(), null);
                 cookie.setMaxAge(0);
                 response.addCookie(cookie);
             }
 
 //        System.out.println("Удаленный домен " + cookie.getDomain());
 
-        request.getSession().invalidate();
+//        request.getSession().invalidate();
         return "redirect:/";
     }
 
