@@ -57,7 +57,7 @@ public class MainController {
 
 //        System.out.println("Удаленный домен " + cookie.getDomain());
 
-        return "link-add";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
