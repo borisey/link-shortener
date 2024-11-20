@@ -29,7 +29,7 @@ public class MainController {
         return "link-add";
     }
 
-    @RequestMapping(path = "/logout", method = RequestMethod.GET)
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public String logout(HttpServletRequest request, HttpServletResponse response, Model model) throws MalformedURLException {
 
         // Получаю хост сайта
