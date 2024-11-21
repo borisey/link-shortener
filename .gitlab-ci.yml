@@ -13,4 +13,4 @@ deploy-production:
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - ssh -o StrictHostKeyChecking=no borisey@95.142.39.128
       'cd /var/www/html/cutli.ru && git pull origin main'
-    - ssh -oStrictHostKeyChecking=no borisey@95.142.39.128 '/bin/sh /stop.sh; /bin/sh /start.sh'
+    - ssh -oStrictHostKeyChecking=no borisey@95.142.39.128 'sudo /bin/sh /stop.sh; sudo /bin/sh /start.sh'
