@@ -36,8 +36,6 @@ public class LinkController {
         // Получаю хост сайта
         String baseUrl = request.getServerName();
 
-        System.out.println(baseUrl);
-
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
         model.addAttribute("UUID", UUID);
@@ -110,16 +108,6 @@ public class LinkController {
     public String deleteFailed(Model model) {
         return "delete-failed";
     }
-
-//    public static String getBaseUrl(HttpServletRequest request) {
-//        String baseUrl = ServletUriComponentsBuilder
-//                .fromRequestUri(request)
-//                .replacePath(null)
-//                .build()
-//                .toUriString();
-//
-//        return baseUrl;
-//    }
 
     static String usingUUID() {
         UUID randomUUID = UUID.randomUUID();
