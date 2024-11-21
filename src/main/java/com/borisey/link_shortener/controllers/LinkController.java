@@ -36,6 +36,8 @@ public class LinkController {
         // Получаю хост сайта
         String baseUrl = request.getServerName();
 
+        System.out.println(baseUrl);
+
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
         model.addAttribute("UUID", UUID);
