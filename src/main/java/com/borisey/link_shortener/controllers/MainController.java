@@ -84,4 +84,14 @@ public class MainController {
         model.addAttribute("UUID", UUID);
         return "auth-success";
     }
+
+    @GetMapping("/robots.txt")
+    public String getRobots() {
+        return "robots.txt";
+    }
+
+    @GetMapping("/sitemap.xml")
+    public String getSitemap() {
+        return "sitemap.xml";
+    }
 }

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Host: cutli.ru
+
+Sitemap: https://cutli.ru/sitemap.xml
