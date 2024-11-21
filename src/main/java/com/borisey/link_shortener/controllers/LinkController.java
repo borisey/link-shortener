@@ -32,7 +32,10 @@ public class LinkController {
     @GetMapping("/link")
     public String link(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletRequest request, Model model) {
         Iterable<Link> links = linkRepository.findByUUID(UUID, Sort.by(Sort.Direction.DESC, "id"));
-        String baseUrl = getBaseUrl(request);
+
+        // Получаю хост сайта
+        String baseUrl = request.getServerName();
+
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
         model.addAttribute("UUID", UUID);
@@ -50,8 +53,10 @@ public class LinkController {
         Link link = new Link(fullUrl);
         LocalDateTime currentDateTime = LocalDateTime.now();
 
+        // Генерация случайной строки
         String randomString = usingUUID();
         String shortUrl = randomString.substring(0, 6);
+
         link.setShortUrl(shortUrl);
         link.setCount(count);
         link.setCreated(currentDateTime);
@@ -64,7 +69,7 @@ public class LinkController {
             user.setUUID(UUID);
             userRepository.save(user);
 
-            // Получаю хост сайта почему появляется точка перед доменом?
+            // Получаю хост сайта
             String baseUrl = request.getServerName();
 
             // Сохраняю UUID в cookie
@@ -73,8 +78,6 @@ public class LinkController {
             cookie.setHttpOnly(true);
             cookie.setDomain(baseUrl);
             cookie.setPath("/"); // global cookie accessible
-
-            System.out.println("Сохраненный домен " + cookie.getDomain());
 
             // Добавляю файл cookie в ответ сервера
             response.addCookie(cookie);
@@ -106,15 +109,15 @@ public class LinkController {
         return "delete-failed";
     }
 
-    public static String getBaseUrl(HttpServletRequest request) {
-        String baseUrl = ServletUriComponentsBuilder
-                .fromRequestUri(request)
-                .replacePath(null)
-                .build()
-                .toUriString();
-
-        return baseUrl;
-    }
+//    public static String getBaseUrl(HttpServletRequest request) {
+//        String baseUrl = ServletUriComponentsBuilder
+//                .fromRequestUri(request)
+//                .replacePath(null)
+//                .build()
+//                .toUriString();
+//
+//        return baseUrl;
+//    }
 
     static String usingUUID() {
         UUID randomUUID = UUID.randomUUID();
@@ -184,7 +187,8 @@ public class LinkController {
     public ResponseEntity<Object> linkRedirect(HttpServletRequest request, @PathVariable(value = "shortUrl") String shortUrl, Model model) throws ParseException {
         Link link = linkRepository.findByShortUrl(shortUrl);
 
-        String baseUrl = getBaseUrl(request);
+        // Получаю хост сайта
+        String baseUrl = request.getServerName();
 
         if (link == null) {
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/not-found")).build();
