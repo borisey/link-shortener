@@ -193,7 +193,7 @@ public class LinkController {
         String baseUrl = request.getServerName();
 
         if (link == null) {
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/not-found")).build();
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/not-found")).build();
         }
 
         LocalDateTime created = link.getCreated()
