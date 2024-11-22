@@ -14,7 +14,7 @@
             <h1 style="text-align: center;">Редактирование ссылки</h1>
             <div th:each="el : ${link}">
                 <form method="post">
-                    <input th:required="required" type="text" th:value="${el.fullUrl}" name="fullUrl" placeholder="Введите название статьи" class="form-control"><br>
+                    <input th:required="required" type="url" th:value="${el.fullUrl}" name="fullUrl" placeholder="Введите название статьи" class="form-control"><br>
                     <input th:required="required" type="number" th:value="${el.count}" name="count" placeholder="Лимит переходов по ссылке" class="form-control"><br>
                     <div style="text-align: center;">
                         <button type="submit" class="btn btn-success">Обновить</button>
