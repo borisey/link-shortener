@@ -96,10 +96,10 @@ public class MainController {
     public String authFailed(Model model) {
 
         // Передаю в вид метатэги
-        model.addAttribute("h1", "Ошибка авторизации");
-        model.addAttribute("metaTitle", "Ошибка авторизации");
-        model.addAttribute("metaDescription", "Ошибка авторизации");
-        model.addAttribute("metaKeywords", "Ошибка авторизации");
+        model.addAttribute("h1", "Пользователь с таким UUID не найден");
+        model.addAttribute("metaTitle", "Пользователь с таким UUID не найден");
+        model.addAttribute("metaDescription", "Пользователь с таким UUID не найден");
+        model.addAttribute("metaKeywords", "Пользователь с таким UUID не найден");
 
         return "auth-failed";
     }

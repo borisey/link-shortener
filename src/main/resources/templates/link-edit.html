@@ -7,7 +7,7 @@
 
     <main>
         <div class="container mt-5 mb-5">
-            <h1 style="text-align: center;">Редактирование ссылки</h1>
+            <h1 th:text="${h1}" style="text-align: center" />
             <div th:each="el : ${link}">
                 <form method="post">
                     <input th:required="required" type="url" th:value="${el.fullUrl}" name="fullUrl" placeholder="Введите название статьи" class="form-control"><br>

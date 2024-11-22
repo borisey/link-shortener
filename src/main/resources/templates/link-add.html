@@ -8,7 +8,9 @@
 
     <main>
         <div class="table-responsive">
-            <h1 style="text-align: center;">Добавление ссылки</h1>
+            <h1 th:text="${h1}" style="text-align: center" />
+
+            <h2 style="text-align: center">Добавьте ссылку</h2>
 
             <form action="/link/add" method="post">
                 <input th:required="required" type="url" name="fullUrl" placeholder="Введите ссылку (например, https://ya.ru/)" class="form-control"><br>

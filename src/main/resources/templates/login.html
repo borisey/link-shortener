@@ -8,7 +8,7 @@
 
     <main>
         <div class="table-responsive">
-            <h1 style="text-align: center;">Авторизация</h1>
+            <h1 th:text="${h1}" style="text-align: center" />
 
             <form action="/login" method="post">
                 <input th:required="required" type="text" name="UUID" placeholder="Введите ваш UUID" class="form-control"><br>
