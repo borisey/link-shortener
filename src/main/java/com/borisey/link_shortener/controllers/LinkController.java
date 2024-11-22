@@ -106,7 +106,10 @@ public class LinkController {
     }
 
     @GetMapping("/link/limit-reached")
-    public String linkLimitReached(Model model) {
+    public String linkLimitReached(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
+
+        // Передаю в вид UUID пользователя
+        model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
         model.addAttribute("h1", "Лимит переходов по ссылке исчерпан");
@@ -118,7 +121,10 @@ public class LinkController {
     }
 
     @GetMapping("/link/not-found")
-    public String linkNotFound(Model model) {
+    public String linkNotFound(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
+
+        // Передаю в вид UUID пользователя
+        model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
         model.addAttribute("h1", "Ссылка была удалена или не найдена");
@@ -130,7 +136,10 @@ public class LinkController {
     }
 
     @GetMapping("/link/edit-failed")
-    public String editFailed(Model model) {
+    public String editFailed(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
+
+        // Передаю в вид UUID пользователя
+        model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
         model.addAttribute("h1", "Редактирование ссылки запрещено");
@@ -142,7 +151,10 @@ public class LinkController {
     }
 
     @GetMapping("/link/delete-failed")
-    public String deleteFailed(Model model) {
+    public String deleteFailed(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
+
+        // Передаю в вид UUID пользователя
+        model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
         model.addAttribute("h1", "Удаление ссылки запрещено");
@@ -172,6 +184,8 @@ public class LinkController {
         ArrayList<Link> res = new ArrayList<>();
         link.ifPresent(res::add);
         model.addAttribute("link", res);
+
+        // Передаю в вид UUID пользователя
         model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
@@ -204,7 +218,15 @@ public class LinkController {
 
         linkRepository.delete(userLink);
 
-        return "redirect:/link";
+        model.addAttribute("UUID", UUID);
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Ссылка успешно удалена");
+        model.addAttribute("metaTitle", "Ссылка успешно удалена");
+        model.addAttribute("metaDescription", "Ссылка успешно удалена");
+        model.addAttribute("metaKeywords", "Ссылка успешно удалена");
+
+        return "delete-success";
     }
 
     @GetMapping("/{shortUrl}")
