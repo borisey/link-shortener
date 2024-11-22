@@ -25,6 +25,13 @@ public class MainController {
     public String home(@CookieValue(value = "UUID", defaultValue = "") String UUID, Model model) {
 
         model.addAttribute("UUID", UUID);
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Сервис коротких ссылок");
+        model.addAttribute("metaTitle", "Сервис коротких ссылок");
+        model.addAttribute("metaDescription", "Сервис коротких ссылок");
+        model.addAttribute("metaKeywords", "Сервис коротких ссылок");
+
         return "link-add";
     }
 
@@ -41,6 +48,12 @@ public class MainController {
             }
         }
 
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Вы успешно вышли");
+        model.addAttribute("metaTitle", "Вы успешно вышли");
+        model.addAttribute("metaDescription", "Вы успешно вышли");
+        model.addAttribute("metaKeywords", "Вы успешно вышли");
+
         return "logout-success";
     }
 
@@ -50,6 +63,12 @@ public class MainController {
         if (!Objects.equals(UUID, "")) {
             return "redirect:/";
         }
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Вы успешно вошли на сайт");
+        model.addAttribute("metaTitle", "Вы успешно вошли на сайт");
+        model.addAttribute("metaDescription", "Вы успешно вошли на сайт");
+        model.addAttribute("metaKeywords", "Вы успешно вошли на сайт");
 
         return "login";
     }
@@ -74,7 +93,14 @@ public class MainController {
     }
 
     @GetMapping("/auth-failed")
-    public String authFailed(HttpServletResponse response, Model model) {
+    public String authFailed(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Ошибка авторизации");
+        model.addAttribute("metaTitle", "Ошибка авторизации");
+        model.addAttribute("metaDescription", "Ошибка авторизации");
+        model.addAttribute("metaKeywords", "Ошибка авторизации");
+
         return "auth-failed";
     }
 
@@ -82,6 +108,13 @@ public class MainController {
     public String authSuccess(@CookieValue(value = "UUID", defaultValue = "") String UUID, HttpServletResponse response, Model model) {
 
         model.addAttribute("UUID", UUID);
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Вы успешно вошли на сайт");
+        model.addAttribute("metaTitle", "Вы успешно вошли на сайт");
+        model.addAttribute("metaDescription", "Вы успешно вошли на сайт");
+        model.addAttribute("metaKeywords", "Вы успешно вошли на сайт");
+
         return "auth-success";
     }
 

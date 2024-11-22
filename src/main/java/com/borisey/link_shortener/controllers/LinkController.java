@@ -15,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.text.ParseException;
 import java.time.LocalDateTime;
@@ -43,11 +42,24 @@ public class LinkController {
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
         model.addAttribute("UUID", UUID);
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Ваши ссылки");
+        model.addAttribute("metaTitle", "Ваши ссылки");
+        model.addAttribute("metaDescription", "Ваши ссылки");
+        model.addAttribute("metaKeywords", "Ваши ссылки");
+
         return "link";
     }
 
     @GetMapping("/link/time-expired")
     public String linkTimeExpired(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Время жизни ссылки истекло");
+        model.addAttribute("metaTitle", "Время жизни ссылки истекло");
+        model.addAttribute("metaDescription", "Время жизни ссылки истекло");
+        model.addAttribute("metaKeywords", "Время жизни ссылки истекло");
 
         return "time-expired";
     }
@@ -95,21 +107,49 @@ public class LinkController {
 
     @GetMapping("/link/limit-reached")
     public String linkLimitReached(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Лимит переходов по ссылке исчерпан");
+        model.addAttribute("metaTitle", "Лимит переходов по ссылке исчерпан");
+        model.addAttribute("metaDescription", "Лимит переходов по ссылке исчерпан");
+        model.addAttribute("metaKeywords", "Лимит переходов по ссылке исчерпан");
+
         return "limit-reached";
     }
 
     @GetMapping("/link/not-found")
     public String linkNotFound(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Ссылка была удалена или не найдена");
+        model.addAttribute("metaTitle", "Ссылка была удалена или не найдена");
+        model.addAttribute("metaDescription", "Ссылка была удалена или не найдена");
+        model.addAttribute("metaKeywords", "Ссылка была удалена или не найдена");
+
         return "not-found";
     }
 
     @GetMapping("/link/edit-failed")
     public String editFailed(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Редактирование ссылки запрещено");
+        model.addAttribute("metaTitle", "Редактирование ссылки запрещено");
+        model.addAttribute("metaDescription", "Редактирование ссылки запрещено");
+        model.addAttribute("metaKeywords", "Редактирование ссылки запрещено");
+
         return "edit-failed";
     }
 
     @GetMapping("/link/delete-failed")
     public String deleteFailed(Model model) {
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Удаление ссылки запрещено");
+        model.addAttribute("metaTitle", "Удаление ссылки запрещено");
+        model.addAttribute("metaDescription", "Удаление ссылки запрещено");
+        model.addAttribute("metaKeywords", "Удаление ссылки запрещено");
+
         return "delete-failed";
     }
 
@@ -119,27 +159,11 @@ public class LinkController {
         return randomUUID.toString().replaceAll("-", "");
     }
 
-    @GetMapping("/link/{id}")
-    public String linkDetails(@PathVariable(value = "id") long id, Model model) {
-        if (!linkRepository.existsById(id)) {
-
-            return "redirect:/link";
-        }
-
-        Optional<Link> link = linkRepository.findById(id);
-        ArrayList<Link> res = new ArrayList<>();
-        link.ifPresent(res::add);
-        model.addAttribute("link", res);
-
-        return "link-details";
-    }
-
     @GetMapping("/link/{id}/edit")
     public String linkEdit(@CookieValue(value = "UUID", defaultValue = "") String UUID, @PathVariable(value = "id") long id, Model model) {
 
-        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
-
         // Если ссылку добавил не этот пользователь
+        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
         if (userLink == null) {
             return "redirect:/link/edit-failed";
         }
@@ -149,6 +173,13 @@ public class LinkController {
         link.ifPresent(res::add);
         model.addAttribute("link", res);
         model.addAttribute("UUID", UUID);
+
+        // Передаю в вид метатэги
+        model.addAttribute("h1", "Редактирование ссылки");
+        model.addAttribute("metaTitle", "Редактирование ссылки");
+        model.addAttribute("metaDescription", "Редактирование ссылки");
+        model.addAttribute("metaKeywords", "Редактирование ссылки");
+
         return "link-edit";
     }
 
@@ -165,9 +196,8 @@ public class LinkController {
     @GetMapping("/link/{id}/delete")
     public String linkLinkRemove(@CookieValue(value = "UUID", defaultValue = "") String UUID, @PathVariable(value = "id") long id, Model model) {
 
-        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
-
         // Если ссылку добавил не этот пользователь
+        Link userLink = linkRepository.findByIdAndUUID(id, UUID);
         if (userLink == null) {
             return "redirect:/link/delete-failed";
         }
