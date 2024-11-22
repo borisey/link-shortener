@@ -139,7 +139,7 @@ public class LinkController {
 
         Link userLink = linkRepository.findByIdAndUUID(id, UUID);
 
-        // Если статью добавил не этот пользователь
+        // Если ссылку добавил не этот пользователь
         if (userLink == null) {
             return "redirect:/link/edit-failed";
         }
@@ -167,7 +167,7 @@ public class LinkController {
 
         Link userLink = linkRepository.findByIdAndUUID(id, UUID);
 
-        // Если статью добавил не этот пользователь
+        // Если ссылку добавил не этот пользователь
         if (userLink == null) {
             return "redirect:/link/delete-failed";
         }
