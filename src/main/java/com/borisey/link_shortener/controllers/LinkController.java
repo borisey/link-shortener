@@ -44,10 +44,10 @@ public class LinkController {
         model.addAttribute("UUID", UUID);
 
         // Передаю в вид метатэги
-        model.addAttribute("h1", "Ваши ссылки");
-        model.addAttribute("metaTitle", "Ваши ссылки");
-        model.addAttribute("metaDescription", "Ваши ссылки");
-        model.addAttribute("metaKeywords", "Ваши ссылки");
+        model.addAttribute("h1", "Мои ссылки");
+        model.addAttribute("metaTitle", "Мои ссылки");
+        model.addAttribute("metaDescription", "Мои ссылки");
+        model.addAttribute("metaKeywords", "Мои ссылки");
 
         return "link";
     }
