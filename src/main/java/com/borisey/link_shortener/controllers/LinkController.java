@@ -36,6 +36,10 @@ public class LinkController {
         // Получаю хост сайта
         String baseUrl = request.getServerName();
 
+        if (Objects.equals(baseUrl, "localhost")) {
+            baseUrl = baseUrl + ":" + request.getServerPort();
+        }
+
         model.addAttribute("links", links);
         model.addAttribute("baseUrl", baseUrl);
         model.addAttribute("UUID", UUID);
