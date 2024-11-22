@@ -181,9 +181,6 @@ public class LinkController {
     public ResponseEntity<Object> linkRedirect(HttpServletRequest request, @PathVariable(value = "shortUrl") String shortUrl, Model model) throws ParseException {
         Link link = linkRepository.findByShortUrl(shortUrl);
 
-        // Получаю хост сайта
-        String baseUrl = request.getServerName();
-
         if (link == null) {
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/not-found")).build();
         }
@@ -196,14 +193,14 @@ public class LinkController {
 
         if (isAfter) {
             linkRepository.delete(link);
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/time-expired")).build();
+            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/time-expired")).build();
         }
 
         Integer count = link.getCount();
 
         if (count != null) {
             if (count == 0) {
-                return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(baseUrl + "/link/limit-reached")).build();
+                return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/limit-reached")).build();
             }
 
             link.setCount(--count);
