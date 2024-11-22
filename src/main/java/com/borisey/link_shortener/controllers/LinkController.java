@@ -210,5 +210,4 @@ public class LinkController {
 
         return ResponseEntity.status(HttpStatus.FOUND).location(URI.create(link.getFullUrl())).build();
     }
-
 }
