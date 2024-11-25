@@ -237,15 +237,16 @@ public class LinkController {
             return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/not-found")).build();
         }
 
+        // Удаляю ссылку с истекшим сроком действия
         LocalDateTime created = link.getCreated()
                 .plusDays(1);
-
         LocalDateTime now = LocalDateTime.now();
         boolean isAfter = now.isAfter(created);
-
         if (isAfter) {
             linkRepository.delete(link);
-            return ResponseEntity.status(HttpStatus.FOUND).location(URI.create("/link/time-expired")).build();
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .location(URI.create("/link/time-expired"))
+                    .build();
         }
 
         Integer count = link.getCount();
