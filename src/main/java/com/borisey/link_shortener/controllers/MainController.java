@@ -65,10 +65,10 @@ public class MainController {
         }
 
         // Передаю в вид метатэги
-        model.addAttribute("h1", "Вы успешно вошли на сайт");
-        model.addAttribute("metaTitle", "Вы успешно вошли на сайт");
-        model.addAttribute("metaDescription", "Вы успешно вошли на сайт");
-        model.addAttribute("metaKeywords", "Вы успешно вошли на сайт");
+        model.addAttribute("h1", "Авторизация");
+        model.addAttribute("metaTitle", "Авторизация");
+        model.addAttribute("metaDescription", "Авторизация");
+        model.addAttribute("metaKeywords", "Авторизация");
 
         return "login";
     }
