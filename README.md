@@ -7,7 +7,7 @@
 <p>1. Создайте директорию проекта, например, "link-shortener"</p>
 <p>2. Скопируйте репозиторий проекта в директорию проекта: выполните команду <strong>git clone git@github.com:borisey/link-shortener.git ./</strong></p>
 <p>3. Установите MySQL в Docker-контейнере: в консоли (в корневой директории проекта) выполните команду <strong>docker-compose up</strong></p>
-<p>4. Запустите приложение в IDE IDEA: откройте файл /src/main/java/com/borisey/link_shortener/LinkShortenerApplication.java и выполните команду "RUN"</p>
+<p>4. Запустите приложение в IDE IDEA: откройте файл <strong>/src/main/java/com/borisey/link_shortener/LinkShortenerApplication.java</strong> и выполните команду <strong>"RUN"</strong></p>
 
 <h2>Описание приложения</h2>
 <h3>1. Функциональность</h3>
